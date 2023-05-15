@@ -1,21 +1,27 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { signupEndpoint } from "../services/axiosInceptor";
+import { AuthContext } from "./../context/userContext";
 const SignUp = () => {
+
+    // const { setUserInfo, users, isAuthenticated, setAuthentic } = useContext(AuthContext);
+    // create state for user field
+// console.log( users, isAuthenticated, )
   const [user, setUser] = useState({
     username: "",
     email: "",
     password: "",
   });
-
+// create error state for error 
   const [errors, setErrors] = useState({
     username: "",
     email: "",
     password: "",
   });
 
+//   validate functions for every fields
   const validateEmail = (email) => {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
@@ -85,7 +91,7 @@ const SignUp = () => {
   };
   return (
     // create signup field with error
-    <div class="flex items-center justify-center h-screen">
+    <div class="flex items-center justify-center h-screen  bg-blue-100 ">
       <div className="border-2 rounded-lg shadow-xl p-20">
         <div className=" text-2xl font-extrabold">FingerPrint App</div>
         <form>

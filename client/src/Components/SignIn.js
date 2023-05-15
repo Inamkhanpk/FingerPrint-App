@@ -6,23 +6,22 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./../context/userContext";
 
 const SignIn = () => {
-    // use context api in component
-  const { setAuthStatus, setUsers } = useContext(AuthContext);
-//   it is used to navigate
+  // use context api in component
+  const { setAuthentic, setUserInfo } = useContext(AuthContext);
+  //   it is used to navigate
   const navigate = useNavigate();
-//   create user state
+  //   create user state
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
-// create error state
+  // create error state
   const [errors, setErrors] = useState({
     email: "",
     password: "",
   });
 
-  
-// validation function
+  // validation function
   const validateEmail = (email) => {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
@@ -32,9 +31,8 @@ const SignIn = () => {
     return password.length >= 6;
   };
 
-//   this is for changing data fields
+  //   this is for changing data fields
   const handleChange = (e) => {
-
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
     setUser({
@@ -60,7 +58,7 @@ const SignIn = () => {
     }
   };
 
-//   it is used for sending form filed to server
+  //   it is used for sending form filed to server
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -68,9 +66,10 @@ const SignIn = () => {
       .then((res) => {
         const token = res.data.token;
         localStorage.setItem("token", token);
-        console.log("res", res);
-        setAuthStatus(true);
-        setUsers(res.data.user);
+        // localStorage.setItem("user",JSON.stringify(res.data.user))
+        // console.log("res", res);
+        setAuthentic(true);
+        setUserInfo(res.data.user);
         navigate("/dashboard");
       })
       .catch((err) => {
@@ -81,9 +80,9 @@ const SignIn = () => {
       });
   };
 
-//   render signin fields
+  //   render signin fields
   return (
-    <div class="flex items-center justify-center h-screen">
+    <div class="flex items-center justify-center h-screen bg-blue-100 ">
       <div className="border-2 rounded-lg shadow-xl p-20">
         <div className=" text-2xl font-extrabold">FingerPrint App</div>
         <form>

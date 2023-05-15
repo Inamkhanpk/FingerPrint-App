@@ -1,12 +1,26 @@
-import { Navigate } from "react-router-dom";
+import { Navigate,Route,Routes } from "react-router-dom";
 import React, { useContext } from "react";
 
 import { AuthContext } from "./../context/userContext";
-//private route is used to check the user authentication
-const PrivateRoute = ({ children }) => {
-  const { isAuthenticated } = useContext(AuthContext);
-  console.log(isAuthenticated, "iaAuthenticated");
 
-  return isAuthenticated ? children : <Navigate to="/signin" />;
-};
+// function PrivateRoute({ children }) {
+//   const { isAuthenticated } = useContext(AuthContext);
+//   if (!isAuthenticated) {
+//     return <Navigate to="/signin" />;
+//   }
+//   return children;
+// }
+
+function PrivateRoute({ path, ...props }) {
+    const { isAuthenticated } = useContext(AuthContext);
+        return isAuthenticated ? (
+            
+            <Route {...props} path={path} />
+            
+          ) : (
+            <Navigate to="/signin" replace />
+          );
+    
+  }
+  
 export default PrivateRoute;

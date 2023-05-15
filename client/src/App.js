@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignUp from "./Components/SignUp";
@@ -9,23 +9,18 @@ import PrivateRoute from "./services/PrivateRoute";
 
 import "react-toastify/dist/ReactToastify.css";
 
+import { AuthContext } from "./context/userContext";
+
 // implement React Router for all pages
 function App() {
+  const { isAuthenticated } = useContext(AuthContext);
   return (
     <div className="App">
       <Router>
         <Routes>
           <Route path="/" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
-          {/* implement privateroute for the restricted pages */}
-          <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
 

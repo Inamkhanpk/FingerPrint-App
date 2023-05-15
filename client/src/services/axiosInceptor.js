@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_BASE_URL = 'http://localhost:4000';
+const API_BASE_URL = "http://localhost:4000";
 
 // Create an Axios instance with JWT interceptor
 const axiosInstance = axios.create();
@@ -8,13 +8,13 @@ const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use(
   (config) => {
     // Get JWT token from local storage
-    const token = localStorage.getItem('token');
-    
+    const token = localStorage.getItem("token");
+
     // If JWT token exists, add it to the request headers
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    
+
     return config;
   },
   (error) => {
@@ -28,5 +28,6 @@ export const api = axiosInstance;
 // Define API endpoints
 export const signinEndpoint = `${API_BASE_URL}/signin`;
 export const signupEndpoint = `${API_BASE_URL}/signup`;
-export const signoutEndpoint = `${API_BASE_URL}/signout`;
+export const takefingerprintEndpoint = `${API_BASE_URL}/takefingerprint`;
+// export const getfingerprintEndpoint = `${API_BASE_URL}/getFingerPrintHistory`;
 // export const profileEndpoint = `${API_BASE_URL}/profile`;
