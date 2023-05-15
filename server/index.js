@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 // cors is added for cross origin
 const cors = require("cors");
 // define server runnig port
- const port = 4000;
+const port = 4000;
 // import mongodb database connection
 require("./db/index.js");
 
@@ -22,6 +22,9 @@ app.use(bodyParser.json());
 const UserRoute = require("./routes/user");
 app.use("/", UserRoute);
 
+// define routes which are coming from frontend
+const FingerPrintRoute = require("./routes/fingerprint");
+app.use("/", FingerPrintRoute);
 
 // server is runnig on port
 app.listen(port, () => {
