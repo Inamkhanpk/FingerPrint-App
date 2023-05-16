@@ -16,5 +16,6 @@ Server Side
 
 
 1 npm install
+2 add .env file for JWT_SECRET="add your secret key" and MONGODB="add your mongondb url"
 2 then run "node index.js
 
